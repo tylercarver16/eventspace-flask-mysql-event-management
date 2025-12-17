@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - EventSpace{% endblock %}
+
+{% block content %}
+    <section class="contact-section">
+        <h2>Contact Us</h2>
+        <p>Have questions or need help planning your event? Reach out!</p>
+
+        <div class="contact-info">
+            <p><strong>Email:</strong> support@eventspace.com</p>
+            <p><strong>Phone:</strong> (555) 123-4567</p>
+            <p><strong>Address:</strong> 123 Venue Lane, Suite 100, Cityville, ST 12345</p>
+        </div>
+
+        <form class="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Your full name">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="your@email.com">
+
+            <label for="message">Message:</label>
+            <textarea id="message" rows="5" placeholder="Type your message here..."></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+{% endblock %}

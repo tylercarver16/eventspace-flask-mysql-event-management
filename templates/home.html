@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}EventSpace - Home{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <h2>Welcome to EventSpace</h2>
+        <p>Your one-stop solution for venue and event planning.</p>
+        <a href="{{ url_for('booking.book') }}" class="cta-button">Book Your Event</a>
+    </section>
+
+    <section class="features">
+        <h3>Why Choose EventSpace?</h3>
+        <ul>
+            <li><strong>Real-Time Venue Availability</strong> – No more guessing or calling around.</li>
+            <li><strong>Manage Your Events</strong> – Clients and planners track everything in one place.</li>
+            <li><strong>Tailored for Small to Medium Events</strong> – Optimized for businesses like yours.</li>
+        </ul>
+    </section>
+
+    <section class="about-preview">
+        <h3>About Us</h3>
+        <p>We simplify event booking and venue management with a modern, intuitive platform.</p>
+        <a href="{{ url_for('main.about') }}">Learn more →</a>
+    </section>
+
+    <section class="contact-preview">
+        <h3>Questions? Let’s talk.</h3>
+        <p>Reach out to our team — we’re here to help.</p>
+        <a href="{{ url_for('main.contact') }}" class="cta-button secondary">Contact Us</a>
+    </section>
+{% endblock %}

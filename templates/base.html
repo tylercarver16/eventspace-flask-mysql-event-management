@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}EventSpace{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="top-left">
+                <h1 class="site-title">
+                    <a href="{{ url_for('main.home') }}">EventSpace</a>
+                </h1>
+            </div>
+    
+            <form action="{{ url_for('booking.venues') }}" method="get" class="search-form">
+                <input type="text" name="name" placeholder="Search venues by name..." required>
+                <button type="submit">Search</button>
+            </form>
+    
+            <a href="{{ url_for('manager.dashboard') }}" class="manager-button">Manager Portal</a>
+        </div>
+    
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('main.home') }}">Home</a></li>
+                <li><a href="{{ url_for('booking.venues') }}">Venues</a></li>
+                <li><a href="{{ url_for('booking.book') }}">Book Now</a></li>
+                <li><a href="{{ url_for('predictor.show_weekday_trends') }}">Booking Trends</a></li>
+                <li><a href="{{ url_for('main.about') }}">About Us</a></li>
+                <li><a href="{{ url_for('main.contact') }}">Contact</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

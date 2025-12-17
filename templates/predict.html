@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Venue Weekday Booking Trends{% endblock %}
+
+{% block content %}
+  <h2>Venue Weekday Booking Trends</h2>
+  <p>This page shows what percentage of each venue's bookings fall on each day of the week.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Venue</th>
+        <th>Sun</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for venue in venue_trends %}
+        <tr>
+          <td>{{ venue.venue_name }}</td>
+          {% for pct in venue.percentages %}
+            <td>{{ pct }}%</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

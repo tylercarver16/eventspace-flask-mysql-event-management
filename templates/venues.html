@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}EventSpace - Venues{% endblock %}
+
+{% block content %}
+    <h2>Available Venues</h2>
+
+    <p>Explore our selection of {{ venues|length }} venue{{ 's' if venues|length != 1 }} available for booking.</p>
+
+    <form method="get" action="{{ url_for('booking.venues') }}" class="filter-form">
+        <div class="filter-group">
+            <input type="text" name="name" placeholder="Venue Name" value="{{ request.args.get('name', '') }}">
+            <input type="number" name="capacity" placeholder="Min. Capacity" value="{{ request.args.get('capacity', '') }}">
+            <input type="text" name="date" placeholder="Booking Date"
+                   onfocus="(this.type='date')" onblur="if(this.value===''){this.type='text'}"
+                   value="{{ request.args.get('date', '') }}">
+    
+            <select name="sort_by">
+                <option value="">Sort By</option>
+                <option value="popularity" {% if request.args.get('sort_by') == 'popularity' %}selected{% endif %}>Popularity</option>
+                <option value="capacity" {% if request.args.get('sort_by') == 'capacity' %}selected{% endif %}>Capacity</option>
+            </select>                
+    
+            <button type="submit">Filter Venues</button>
+        </div>
+    </form>
+    
+    
+
+    <div class="venue-list">
+        {% for venue in venues %}
+            <div class="venue-card">
+                <h3>{{ venue.venue_name }}</h3>
+                <p><strong>Address:</strong> {{ venue.venue_adr }}</p>
+                <p><strong>Capacity:</strong> {{ venue.capacity }} guests</p>
+                <p><strong>Facilities:</strong> {{ venue.facilities }}</p>
+                <p><strong>Total Bookings:</strong> {{ venue.booking_count }}</p>
+                <a href="{{ url_for('booking.book', venue_id=venue.venue_id) }}" class="cta-button">Book This Venue</a>
+            </div>
+        {% else %}
+            <p>No venues available at this time.</p>
+        {% endfor %}
+    </div>
+    
+{% endblock %}

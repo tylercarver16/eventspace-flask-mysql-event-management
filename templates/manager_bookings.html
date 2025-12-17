@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Manager Portal - Bookings{% endblock %}
+
+{% block content %}
+<h2>All Bookings</h2>
+
+{% if total_bookings is defined %}
+    <p class="subtext">
+        Displaying {{ bookings|length }} of {{ total_bookings }} total bookings.
+    </p>
+{% endif %}
+
+
+{% if bookings %}
+<form method="get" class="filter-form">
+    <label>Booking ID:</label>
+    <input type="text" name="booking_id" value="{{ filters.booking_id }}">
+
+    <label>Client Name:</label>
+    <input type="text" name="client_name" value="{{ filters.client_name }}">
+
+    <label>Event Name:</label>
+    <input type="text" name="event_name" value="{{ filters.event_name }}">
+
+    <label>Event Type:</label>
+    <select name="event_type">
+        <option value="">-- All Types --</option>
+        <option value="Corporate" {% if filters.event_type == 'Corporate' %}selected{% endif %}>Corporate</option>
+        <option value="Social" {% if filters.event_type == 'Social' %}selected{% endif %}>Social</option>
+        <option value="Other" {% if filters.event_type == 'Other' %}selected{% endif %}>Other</option>
+    </select>
+
+    <label>Venue Name:</label>
+    <input type="text" name="venue_name" value="{{ filters.venue_name }}">
+
+    <label>Event Date:</label>
+    <input type="date" name="event_date" value="{{ filters.event_date }}">
+
+    <label>Booked On:</label>
+    <input type="date" name="booking_date" value="{{ filters.booking_date }}">
+
+    <button type="submit">Search</button>
+</form>
+
+<table class="booking-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Client</th>
+            <th>Contact</th>
+            <th>Event</th>
+            <th>Type</th>
+            <th>Venue</th>
+            <th>Event Date</th>
+            <th>Booked On</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.booking_id }}</td>
+            <td>{{ booking.client_name }}</td>
+            <td>{{ booking.client_email }}</td>
+            <td>{{ booking.event_name }}</td>
+            <td>{{ booking.event_type }}</td>
+            <td>{{ booking.venue_name }}</td>
+            <td>
+                {% if booking.event_date.strftime %}
+                    {{ booking.event_date.strftime('%B %d, %Y') }}
+                {% else %}
+                    {{ booking.event_date }}
+                {% endif %}
+            </td>
+            <td>
+                {% if booking.booking_date.strftime %}
+                    {{ booking.booking_date.strftime('%B %d, %Y') }}
+                {% else %}
+                    {{ booking.booking_date }}
+                {% endif %}
+            </td>
+            <td>
+                <a href="{{ url_for('manager.edit_booking', booking_id=booking.booking_id) }}" class="cta-button">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <p>No bookings available.</p>
+{% endif %}
+{% endblock %}

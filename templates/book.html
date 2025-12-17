@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}EventSpace - Book an Event{% endblock %}
+
+{% block content %}
+    <h2>Book an Event</h2>
+    <p>Fill out the form below to reserve a venue for your event.</p>
+
+    <form action="{{ url_for('booking.submit_booking') }}" method="post" class="booking-form">
+        <fieldset>
+            <legend>Client Info</legend>
+            <label for="client_name">Name:</label>
+            <input type="text" name="client_name" id="client_name" required>
+
+            <label for="contact_info">Email:</label>
+            <input type="text" name="contact_info" id="contact_info" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Event Details</legend>
+            <label for="event_name">Event Name:</label>
+            <input type="text" name="event_name" id="event_name" required>
+
+            <label for="event_type">Event Type:</label>
+            <select name="event_type" id="event_type" required>
+                <option value="">-- Select Type --</option>
+                <option value="Corporate">Corporate</option>
+                <option value="Social">Social</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="event_date">Event Date:</label>
+            <input type="date" name="event_date" id="event_date" required>
+
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" rows="4"></textarea>
+        </fieldset>
+
+        <fieldset>
+            <legend>Select Venue</legend>
+            <label for="venue_id">Venue:</label>
+            <select name="venue_id" id="venue_id" required>
+                {% for venue in venues %}
+                    <option value="{{ venue.venue_id }}"
+                        {% if selected_venue_id and selected_venue_id == venue.venue_id|string %}selected{% endif %}>
+                        {{ venue.venue_name }} ({{ venue.capacity }} guests)
+                    </option>
+                {% endfor %}
+            </select>
+        </fieldset>
+
+        <button type="submit" class="cta-button">Submit Booking</button>
+    </form>
+{% endblock %}

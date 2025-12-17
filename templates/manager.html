@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Manager Portal{% endblock %}
+
+{% block content %}
+    <h2>Manager Portal</h2>
+    <p>Welcome, manager. From here, you can manage venues, bookings, and clients.</p>
+
+    <a href="{{ url_for('manager.view_bookings') }}" class="cta-button">Booking Manager</a>
+
+    <a href="{{ url_for('manager.add_venue') }}" class="cta-button">Venue Manager</a>
+{% endblock %}

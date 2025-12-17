@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Venue{% endblock %}
+
+{% block content %}
+<h2>Edit Venue</h2>
+<form method="post" class="edit-venue-form">
+    <label for="venue_name">Venue Name:</label>
+    <input type="text" name="venue_name" id="venue_name" value="{{ venue.venue_name }}" required>
+
+    <label for="venue_adr">Address:</label>
+    <input type="text" name="venue_adr" id="venue_adr" value="{{ venue.venue_adr }}" required>
+
+    <label for="capacity">Capacity:</label>
+    <input type="number" name="capacity" id="capacity" value="{{ venue.capacity }}" required>
+
+    <label for="facilities">Facilities:</label>
+    <textarea name="facilities" id="facilities" rows="4">{{ venue.facilities }}</textarea>
+
+    <button type="submit" class="cta-button">Update Venue</button>
+    <a href="{{ url_for('manager.add_venue') }}" class="cancel-link">Cancel</a>
+</form>
+{% endblock %}
