@@ -5,6 +5,9 @@ EventSpace is a **database-driven web application** built with Flask and MySQL t
 
 The system was designed to reflect real-world event planning workflows and emphasizes **relational database design, data integrity, and practical analytics**.
 
+## Database Design
+[Database Design PDF](database-schema.pdf)
+
 ---
 
 ## Key Features
